@@ -17,6 +17,10 @@ const eventSchema = new Schema({
     date: {
         type: Date,
         require: true,
+    },
+    creator: {
+        type: Schema.ObjectId,
+        ref: 'User'
     }
 });
 
