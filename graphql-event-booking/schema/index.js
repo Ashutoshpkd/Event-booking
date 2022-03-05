@@ -8,6 +8,12 @@ type Booking {
     createdAt: String!
     updatedAt: String!
 }
+type AuthData {
+    userId: ID!
+    email: String!
+    token: String!
+    expiresIn: Int!
+}
 type Events {
     _id: ID!
     title: String!
@@ -31,12 +37,13 @@ input Event {
 type RootQuery {
     events: [Events!]!
     bookings: [Booking!]!
+    login(email: String!, password: String!): AuthData!
 }
 type RootMutation {
-    createEvent(event: Event): Events!
+    createEvent(event: Event): Events
     createUser(email: String!, password: String!): User
-    createBooking(eventId: ID!): Booking!
-    cancleBooking(bookingId: ID!): Events!
+    createBooking(eventId: ID!): Booking
+    cancleBooking(bookingId: ID!): Events
 }
 schema {
     query: RootQuery,
