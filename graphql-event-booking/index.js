@@ -4,9 +4,11 @@ const { graphqlHTTP } = require('express-graphql');
 const mongoose = require('mongoose');
 const graphqlSchema = require('./schema/index');
 const rootResolver = require('./resolvers/index');
+const middleware = require('./middleware/auth');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(middleware);
 
 app.use('/graphql', graphqlHTTP({
     schema: graphqlSchema,

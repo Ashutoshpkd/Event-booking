@@ -19,8 +19,11 @@ const getUser = async userId => {
 };
 
 module.exports = {
-      bookings: async () => {
+      bookings: async (args, req) => {
           try {
+            if(!req.isAuth) {
+                throw new Error('User not authorised.')
+            }
             const bookedEvents = await Bookings.find();
             const response = bookedEvents.map(bookedEvent => {
               return {
@@ -38,11 +41,14 @@ module.exports = {
               throw error;
           }
       },
-      createBooking: async args => {
+      createBooking: async (args, req) => {
           try {
+            if(!req.isAuth) {
+                throw new Error('User not authorised.')
+            }
             const booking = new Bookings({
                 event: args.eventId,
-                user: '621dc1e9b9f31e3b1a91e653'
+                user: req.userId
             });
             const result = await booking.save();
             return {
@@ -58,8 +64,11 @@ module.exports = {
               throw error;
           }
       },
-      cancleBooking: async args => {
+      cancleBooking: async (args, req) => {
           try {
+            if(!req.isAuth) {
+                throw new Error('User not authorised.')
+            }
             const cancledBooking = await Bookings.findByIdAndDelete(args.bookingId);
             if(!cancledBooking) {
                 throw new Error('Booking does not exist.');
