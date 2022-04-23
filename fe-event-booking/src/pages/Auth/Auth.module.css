@@ -1,0 +1,51 @@
+.form_control {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding: 0 3rem;
+}
+.mainform {
+    padding: 2rem 0;
+}
+
+.main {
+    margin: 2rem auto;
+    background-color: white;
+    width: 80%;
+    max-width: 30rem;
+    height: 20rem;
+    border: 1px solid royalblue;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0,0.5);
+}
+
+.form_control_label {
+    margin: 1rem 0;
+
+}
+
+.form_control_button {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    margin-left: 3rem;
+    margin-right: 4.4rem;
+}
+
+.button {
+    padding: 0.7rem;
+    background-color: royalblue;
+    color: white;
+    cursor: pointer;
+    border: 1px solid lightskyblue;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0,0.3);
+}
+
+.form_input {
+    padding: 10px;
+    border-color: rgb(4, 190, 247);
+    border-radius: 7px;
+    color: darkblue;
+    font-size: 15px;
+}

@@ -8,6 +8,19 @@ const middleware = require('./middleware/auth');
 
 const app = express();
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  console.log();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if(req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+ return next();
+});
+
 app.use(middleware);
 
 app.use('/graphql', graphqlHTTP({
@@ -22,8 +35,8 @@ mongoose
     }@cluster0.9tjtu.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`
   )
   .then(() => {
-      console.log('Connected to port 3000');
-      app.listen(3000);
+      console.log('Connected to port 3001');
+      app.listen(3001);
   })
   .catch(err => {
     console.log(err);
