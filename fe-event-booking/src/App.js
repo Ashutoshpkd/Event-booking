@@ -1,10 +1,17 @@
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom'
 import NavBar from './components/Navigation/NavBar';
 import Auth from './pages/Auth/Auth';
-import classes from './App.module.css'
+import Bookings from './pages/Bookings/Bookings';
+import Events from './pages/Events/Event';
 
-function App() {
+function App(props) {
+  const {
+    token,
+    login,
+    logout,
+  } = props;
+
   return (
     <>
     <NavBar 
@@ -12,14 +19,30 @@ function App() {
       authenticate='Authenticate'
       bookings='Bookings'
       events='Events'
+      token={token}
     />
       <Routes>
-        <Route path="/auth" element={<Auth />}/>
-        <Route path="/bookings" element={null}/>
-        <Route path="/events" element={null}/>
+        {!token && (<Route path="/" element={<Navigate to="/auth" replace/>}/>)}
+        {token && (<Route path="/auth" element={<Navigate to="/events" replace/>}/>)}
+        {!token && (<Route path="/auth" element={<Auth loginHandler={login} logout={logout}/>}/>)}
+        {!token && (<Route path="/bookings" element={<Bookings />}/>)}
+        <Route path="/events" element={<Events />}/>
       </Routes>
     </>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    userId: state.userId,
+  }
+};
 
-export default App;
+const dispatchToProps = (dispatch) => {
+  return {
+    login: (payload) => dispatch({payload, type:'LOGIN'}),
+    logout: () => dispatch({type: 'LOGOUT'}),
+  }
+};
+
+export default connect(mapStateToProps, dispatchToProps)(App);

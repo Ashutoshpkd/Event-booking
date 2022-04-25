@@ -57,7 +57,11 @@ function Auth(props) {
                 }
             });
             const data = await response.json();
-            console.log(data);
+            if(data.data.login.token) {
+                const storage = window.sessionStorage;
+                storage.setItem('signInToken', data.data.login.token);
+                props.loginHandler({token: data.data.login.token, userId: data.data.login.userId});   
+            }
         } catch (error) {
             console.log('ERROR' - error.message);
             console.log('COMPLETE ERROR', error, JSON.stringify(error));

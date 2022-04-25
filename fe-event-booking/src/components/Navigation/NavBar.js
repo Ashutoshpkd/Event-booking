@@ -13,17 +13,21 @@ const NavBar = (props) => {
             <nav className={classes.navbar}>
                 <ul className={classes.list_container}>
                     <li>
-                        <NavLink to='/auth'>
+                      {!props.token && (
+                        <NavLink to='/auth' className={(navData) => navData.isActive ? classes.active : ''}>
                             {props.authenticate}
                         </NavLink>
+                      )}
                     </li>
                     <li>
-                        <NavLink to='/bookings'>
+                        {props.token && (
+                            <NavLink to='/bookings' className={(navData) => navData.isActive ? classes.active : ''}>
                             {props.bookings}
                         </NavLink>
+                        )}
                     </li>
                     <li>
-                        <NavLink to='/events'>
+                        <NavLink to='/events' className={(navData) => navData.isActive ? classes.active : ''}>
                             {props.events}
                         </NavLink>
                     </li>

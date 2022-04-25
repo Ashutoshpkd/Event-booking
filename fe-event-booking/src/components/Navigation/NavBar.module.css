@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+h1 {
+    opacity: 0.5;
+}
+
 .list_container {
     margin: 0 1rem;
     padding: 0;
@@ -20,10 +24,18 @@
     text-decoration: none;
     color: black;
     margin: 0 1rem;
+    /* border: 1px solid royalblue;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 7px; */
 }
 
 .list_container a:hover,
-.list_container a:active,
- a.active {
+.list_container a:active
+{
     color: darkorange;
+}
+
+.active {
+    color: orange;
 }
